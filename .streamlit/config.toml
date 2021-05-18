@@ -1,5 +1,5 @@
 [server]
-maxUploadSize = 20
+maxUploadSize = 10
 
 [runner]
 magicEnabled = false
