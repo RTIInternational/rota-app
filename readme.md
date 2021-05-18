@@ -3,9 +3,9 @@
 
 ### ℹ️ Intro
 
-[![HuggingFace Models](https://img.shields.io/badge/%F0%9F%A4%97%20models-2021.05.17.14-blue)](https://huggingface.co/rti-international/rota)
+[![HuggingFace Models](https://img.shields.io/badge/%F0%9F%A4%97%20models-2021.05.18.15-blue)](https://huggingface.co/rti-international/rota)
 [![GitHub Model Release](https://img.shields.io/github/v/release/RTIInternational/rota?logo=github)](https://github.com/RTIInternational/rota)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4739146.svg)](https://doi.org/10.5281/zenodo.4739146)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4770492.svg)](https://doi.org/10.5281/zenodo.4770492)
 
 Criminal justice research often requires conversion of free-text offense descriptions into overall charge categories to aid analysis. For example, the free-text offense of "eluding a police vehicle" would be coded to a charge category of "Obstruction - Law Enforcement". Since free-text offense descriptions aren't standardized and often need to be categorized in large volumes, this can result in a manual and time intensive process for researchers. ROTA is a machine learning model for converting offense text into offense codes. 
 

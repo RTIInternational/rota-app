@@ -25,7 +25,7 @@ from transformers.file_utils import http_get
 
 from cleaning_utils import cleaner
 
-RELEASE_TAG = "2021.05.17.14"
+RELEASE_TAG = "2021.05.18.15"
 OUTPUT_PATH = Path("onnx/rota-quantized.onnx")
 ONNX_RELEASE = (
     "https://github.com/RTIInternational/"
