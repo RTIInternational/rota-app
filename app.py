@@ -9,7 +9,7 @@ from stqdm import stqdm
 from onnx_model_utils import predict, predict_bulk, max_pred_bulk, RELEASE_TAG
 from download import download_link
 
-PRED_BATCH_SIZE = 8
+PRED_BATCH_SIZE = 4
 
 
 st.set_page_config(page_title="ROTA", initial_sidebar_state="collapsed")
