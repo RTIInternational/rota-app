@@ -14,3 +14,5 @@ Currently ROTA predicts the *Charge Category* of a given offense text. A *charge
 The model was trained on [publicly available data](https://web.archive.org/web/20201021001250/https://www.icpsr.umich.edu/web/pages/NACJD/guides/ncrp.html) from a crosswalk containing offenses from all 50 states combined with three additional hand-labeled offense text datasets.
 
 For more information on the model, please see the [model repo](https://huggingface.co/rti-international/rota).
+
+This model and application were developed by the [RTI International Center for Data Science](https://www.rti.org/centers/rti-center-data-science).
