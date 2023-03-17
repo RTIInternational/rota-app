@@ -15,4 +15,4 @@ The model was trained on [publicly available data](https://web.archive.org/web/2
 
 For more information on the model, please see the [model repo](https://huggingface.co/rti-international/rota).
 
-This model and application were developed by the [RTI International Center for Data Science](https://www.rti.org/centers/rti-center-data-science).
+This model and application were developed by the [RTI International Center for Data Science and AI](https://www.rti.org/centers/rti-center-data-science).
