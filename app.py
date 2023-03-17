@@ -1,21 +1,23 @@
-from functools import partial
+# from functools import partial
 from pathlib import Path
 
 from pandas import DataFrame, read_csv, read_excel
 import streamlit as st
-from more_itertools import ichunked
-from stqdm import stqdm
+# from more_itertools import ichunked
+# from stqdm import stqdm
 
-from onnx_model_utils import predict, predict_bulk, max_pred_bulk, RELEASE_TAG
-from download import download_link
+# from onnx_model_utils import predict, predict_bulk, max_pred_bulk, RELEASE_TAG
+# from download import download_link
 
-PRED_BATCH_SIZE = 4
-
-st.markdown("ROTA is now available at https://huggingface.co/spaces/rti-international/rota-app")
+# PRED_BATCH_SIZE = 4
 
 st.set_page_config(page_title="ROTA", initial_sidebar_state="collapsed")
 
+st.markdown("ROTA is now available at https://huggingface.co/spaces/rti-international/rota-app")
+
 st.markdown(Path("readme.md").read_text())
+
+st.markdown("To use ROTA: go to https://huggingface.co/spaces/rti-international/rota-app")
 
 # st.markdown("## ✏️ Single Coder Demo")
 # input_text = st.text_input(
