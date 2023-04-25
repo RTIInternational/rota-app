@@ -13,6 +13,7 @@ on:
       - "poetry.lock"
       - "**.py"
       - ".github/workflows/ci.yml"
+  workflow_dispatch:
 
 # Cancel existing executions when new commits are pushed onto the branch
 concurrency:
