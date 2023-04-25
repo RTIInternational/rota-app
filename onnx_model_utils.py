@@ -11,9 +11,11 @@ os.environ["TOKENIZERS_PARALLELISM"] = "true"
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, BinaryIO, Dict, List, Optional
 import gzip
 import shutil
+import copy
+
 
 from numpy import ndarray
 import requests
@@ -21,7 +23,7 @@ import streamlit as st
 from onnxruntime import GraphOptimizationLevel, InferenceSession, SessionOptions
 from scipy.special import softmax
 from transformers import AutoTokenizer
-from transformers.file_utils import http_get
+from tqdm import tqdm
 
 from cleaning_utils import cleaner
 
@@ -36,7 +38,40 @@ ONNX_RELEASE = (
 )
 
 
-@st.cache
+def http_get(
+    url: str,
+    temp_file: BinaryIO,
+    proxies=None,
+    resume_size=0,
+    headers: Optional[Dict[str, str]] = None,
+):
+    """
+    Download remote file. Do not gobble up errors.
+
+    Vendored from transformers==4.5.1
+    """
+    headers = copy.deepcopy(headers)
+    if resume_size > 0:
+        headers["Range"] = f"bytes={resume_size}-"
+    r = requests.get(url, stream=True, proxies=proxies, headers=headers)
+    r.raise_for_status()
+    content_length = r.headers.get("Content-Length")
+    total = resume_size + int(content_length) if content_length is not None else None
+    progress = tqdm(
+        unit="B",
+        unit_scale=True,
+        total=total,
+        initial=resume_size,
+        desc="Downloading",
+    )
+    for chunk in r.iter_content(chunk_size=1024):
+        if chunk:  # filter out keep-alive new chunks
+            progress.update(len(chunk))
+            temp_file.write(chunk)
+    progress.close()
+
+
+@st.cache_data
 def cleaner_cache(text):
     return cleaner(text)
 
