@@ -36,7 +36,7 @@ ONNX_RELEASE = (
 )
 
 
-@st.cache
+@st.cache_data
 def cleaner_cache(text):
     return cleaner(text)
 
