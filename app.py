@@ -27,7 +27,7 @@ predictions = predict(input_text)
 
 st.markdown("Predictions")
 labels = ["Charge Category"]
-st.dataframe(
+st.table(
     DataFrame(predictions[0])
     .assign(
         confidence=lambda d: d["score"].apply(lambda d: round(d * 100, 0)).astype(int)
@@ -70,7 +70,7 @@ if uploaded_file is not None:
     st.markdown(
         f"Uploaded Data Sample `(Deduplicated. N Rows = {len(df_unique)}, Original N = {original_length})`"
     )
-    st.dataframe(df_unique.head(20))
+    st.table(df_unique.head(20))
     st.write(f"3️⃣ **Predict Using Column: `{selected_column}`**")
 
     column = df_unique[selected_column].copy()
@@ -102,7 +102,7 @@ if uploaded_file is not None:
         # # TODO: Add all scores
 
         st.write("**Sample Output**")
-        st.dataframe(pred_df.head(100))
+        st.table(pred_df.head(100))
 
         tmp_download_link = download_link(
             pred_df,

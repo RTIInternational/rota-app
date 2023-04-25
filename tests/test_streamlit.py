@@ -46,5 +46,10 @@ def test_single_input(page: Page, streamlit_app_session):
         "BURGLARY - OVERNIGHT ACCOMMODATION, PERSON PRESENT"
     )
     page.get_by_role("textbox", name="Input Offense").press("Enter")
-    assert page.get_by_test_id("glide-cell-1-0").text_content() == "BURGLARY"
-    assert page.get_by_test_id("glide-cell-2-0").text_content() == "100"
+
+    assert (
+        page.get_by_role("row", name="BURGLARY")
+        .get_by_role("cell", name="100", exact=True)
+        .text_content()
+        == "100"
+    )
