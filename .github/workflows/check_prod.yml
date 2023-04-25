@@ -1,0 +1,35 @@
+name: Check Prod Instance on Streamlit Cloud
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "0 0 * * MON"
+  workflow_dispatch:
+
+env:
+  PROD_URL: "https://rti-rota.streamlit.app/"
+
+# Cancel existing executions when new commits are pushed onto the branch
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python (and Cache CI dependencies)
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+          cache: pip
+      - name: Cache Playwright
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-cache
+      - name: Upgrade pip, install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright==1.32.1
+      - name: Check Prod
+        run: python .github/workflows/check_prod.py

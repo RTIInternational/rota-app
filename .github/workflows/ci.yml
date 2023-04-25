@@ -1,0 +1,50 @@
+name: Linting & Testing
+
+on:
+  push:
+    branches: [main]
+    # Only on these paths so that something like a README update doesn't trigger it
+    paths:
+      - "poetry.lock"
+      - "**.py"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "poetry.lock"
+      - "**.py"
+      - ".github/workflows/ci.yml"
+
+# Cancel existing executions when new commits are pushed onto the branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python (and Cache CI dependencies)
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+          cache: pip
+      - name: Cache Playwright
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-cache
+      - name: Upgrade pip, install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          playwright install
+      - name: Run black
+        run: black --check .
+      - name: Run ruff
+        run: ruff check .
+      - name: Run Pytest
+        run: pytest
