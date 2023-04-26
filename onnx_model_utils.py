@@ -1,5 +1,7 @@
+# ruff: noqa: E402
+# This turns off 'imports not at top of file' to address the
+# staggered imports below
 import os
-
 from psutil import cpu_count
 
 # Constants from the performance optimization available in onnxruntime
@@ -8,22 +10,21 @@ os.environ["OMP_NUM_THREADS"] = str(cpu_count(logical=True))
 os.environ["OMP_WAIT_POLICY"] = "ACTIVE"
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
+import copy
+import gzip
 import json
 import os
+import shutil
 from pathlib import Path
 from typing import Any, BinaryIO, Dict, List, Optional
-import gzip
-import shutil
-import copy
 
-
-from numpy import ndarray
 import requests
 import streamlit as st
+from numpy import ndarray
 from onnxruntime import GraphOptimizationLevel, InferenceSession, SessionOptions
 from scipy.special import softmax
-from transformers import AutoTokenizer
 from tqdm import tqdm
+from transformers import AutoTokenizer
 
 from cleaning_utils import cleaner
 
@@ -117,8 +118,8 @@ class ONNXCPUClassificationPipeline:
             softmax_array (np.ndarray): array of shape (n_preds, n_labels)
 
         Returns:
-            List[List[Dict[str, Any]]]: Output of predictions, where each row is a list of
-            Dict with keys "label" and "score"
+            List[List[Dict[str, Any]]]: Output of predictions, where each row is a list
+            of Dict with keys "label" and "score"
         """
         predictions = [
             [
@@ -172,10 +173,12 @@ def predict(text: str, sort=True) -> List[List[Dict[str, Any]]]:
 
     Args:
         text (str): The input text to generate a prediction for (post-clean)
-        sort (bool, optional): Whether to sort the predicted labels by score. Defaults to True.
+        sort (bool, optional): Whether to sort the predicted labels by score.
+          Defaults to True.
 
     Returns:
-        List[List[Dict[str, Any]]]: A list with a single element containing predicted label scores.
+        List[List[Dict[str, Any]]]: A list with a single element containing predicted
+          label scores.
     """
     clean = cleaner_cache(text)
     preds = pipeline([clean])
@@ -225,6 +228,7 @@ def max_pred_bulk(preds: List[List[Dict[str, Any]]]) -> List[Dict[str, Any]]:
         preds (List[List[Dict[str, Any]]]): A list of predictions
 
     Returns:
-        List[Dict[str, Any]: A list of  'label' and 'score' dict with the highest score value
+        List[Dict[str, Any]: A list of  'label' and 'score' dict with the highest score
+          value
     """
     return [_max_pred(pred) for pred in preds]
