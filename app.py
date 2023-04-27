@@ -6,7 +6,7 @@ import streamlit as st
 from more_itertools import ichunked
 from stqdm import stqdm
 
-from onnx_model_utils import predict, predict_bulk, max_pred_bulk, RELEASE_TAG
+from onnx_model_utils import predict, predict_bulk, max_pred_bulk
 from download import download_link
 
 PRED_BATCH_SIZE = 4
@@ -68,14 +68,15 @@ if uploaded_file is not None:
     df_unique = df.drop_duplicates(subset=[selected_column]).copy()
     del df
     st.markdown(
-        f"Uploaded Data Sample `(Deduplicated. N Rows = {len(df_unique)}, Original N = {original_length})`"
+        f"Uploaded Data Sample `(Deduplicated. N Rows = {len(df_unique)},"
+        f" Original N = {original_length})`"
     )
     st.table(df_unique.head(20))
     st.write(f"3️⃣ **Predict Using Column: `{selected_column}`**")
 
     column = df_unique[selected_column].copy()
     del df_unique
-    if st.button(f"Compute Predictions"):
+    if st.button("Compute Predictions"):
         input_texts = (value for _, value in column.items())
 
         n_batches = (len(column) // PRED_BATCH_SIZE) + 1

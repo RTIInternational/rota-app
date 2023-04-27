@@ -9,8 +9,10 @@ all_punctuation = all_punctuation.replace("$", "")
 
 
 # "regex separator"
-# captures the following: 1+ spaces OR 1+ non-word characters (ex: "/", "-"), OR 1 word boundary
-# apply the this variable using an `fr` string in the regex substituion (ex: `fr"\bw{sep}force\b"`)
+# captures the following: 1+ spaces OR 1+ non-word characters (ex: "/", "-"),
+# OR 1 word boundary
+# apply the this variable using an `fr` string in the regex substituion
+# (ex: `fr"\bw{sep}force\b"`)
 sep = r"(?: +|\W+|\b)"
 
 
@@ -47,15 +49,15 @@ removals = [
 
 substitutions = [
     # LESS THAN / GREATER THAN terms =========
-    RegexSubstitution("Less Than", rf"\b(?:&LT;|lt)\b", " less than "),
-    RegexSubstitution("Less Than 2", rf"\blt(?=\d+)\b", "less than "),
-    RegexSubstitution("Less Than 3", rf"\<", " less than "),
-    RegexSubstitution("Greater Than", rf"\b(?:&GT;|gt|\>)\b", " greater than "),
-    RegexSubstitution("Greater Than 2", rf"\bgt(?=\d+)\b", "greater than "),
-    RegexSubstitution("Greater Than 3", rf"\>", " greater than "),
+    RegexSubstitution("Less Than", r"\b(?:&LT;|lt)\b", " less than "),
+    RegexSubstitution("Less Than 2", r"\blt(?=\d+)\b", "less than "),
+    RegexSubstitution("Less Than 3", r"\<", " less than "),
+    RegexSubstitution("Greater Than", r"\b(?:&GT;|gt|\>)\b", " greater than "),
+    RegexSubstitution("Greater Than 2", r"\bgt(?=\d+)\b", "greater than "),
+    RegexSubstitution("Greater Than 3", r"\>", " greater than "),
     # WITH terms ===========
-    RegexSubstitution("With Out", rf"\bw{sep}(?:o|out)\b", "without"),
-    RegexSubstitution("With Out 2", rf"\bwo\b", "without"),
+    RegexSubstitution("With Out", r"\bw{sep}(?:o|out)\b", "without"),
+    RegexSubstitution("With Out 2", r"\bwo\b", "without"),
     RegexSubstitution("Within", rf"\bw{sep}(?:i|in)\b", "within", priority=5),
     RegexSubstitution(
         "With Intent",
@@ -188,7 +190,9 @@ substitutions = [
         rf"\bvehicle{sep}w{sep}",
         "vehicle with",
     ),
-    RegexSubstitution(  # TODO: is this "possession with" or "possession weapon"? see concealed weapon as example
+    # TODO: is this "possession with" or "possession weapon"?
+    # see concealed weapon as example
+    RegexSubstitution(
         "possession with",
         rf"\b(?:possession|possess|poss){sep}w{sep}",
         "possession with",
@@ -242,7 +246,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "intimidation",
-        rf"\b(?:intim|intimid)\b",
+        r"\b(?:intim|intimid)\b",
         "intimidation",
     ),
     # DOMESTIC VIOLENCE TERMS / PROTECTION / RESTRAINING ORDERS
@@ -284,92 +288,95 @@ substitutions = [
         "prior conviction",
     ),
     # ==== GENERAL TERMS =====
-    RegexSubstitution(  # NOTE: added a negative lookbehind for 'mentally' so we won't override 'mentally ill' cases
+    # NOTE: added a negative lookbehind for 'mentally' so we won't
+    # override 'mentally ill' cases
+    RegexSubstitution(
         "illegal",
-        rf"\b(?<!mentally )(?:ill|illeg|illgl)\b",
+        r"\b(?<!mentally )(?:ill|illeg|illgl)\b",
         "illegal",
     ),
     RegexSubstitution("commercial fish", rf"\bcomm{sep}fish\b", "commercial fish"),
-    RegexSubstitution("vessel", rf"\bvess\b", "vessel"),
+    RegexSubstitution("vessel", r"\bvess\b", "vessel"),
     RegexSubstitution(
         "traffic control device",
         rf"\btraff{sep}control{sep}dev\b",
         "traffic control device",
     ),
-    RegexSubstitution("non-culpable", rf"\bnonculp\b", "non-culpable"),
-    RegexSubstitution("prohibited", rf"\bprohib\b", "prohibited"),
-    RegexSubstitution("nuisance", rf"\bnuis\b", "nuisance"),
-    RegexSubstitution("obstruction", rf"\bobstr\b", "obstruction"),
-    RegexSubstitution("pedestrian", rf"\bped\b", "pedestrian"),
-    RegexSubstitution("conduct", rf"\bcond\b", "conduct", priority=20),
+    RegexSubstitution("non-culpable", r"\bnonculp\b", "non-culpable"),
+    RegexSubstitution("prohibited", r"\bprohib\b", "prohibited"),
+    RegexSubstitution("nuisance", r"\bnuis\b", "nuisance"),
+    RegexSubstitution("obstruction", r"\bobstr\b", "obstruction"),
+    RegexSubstitution("pedestrian", r"\bped\b", "pedestrian"),
+    RegexSubstitution("conduct", r"\bcond\b", "conduct", priority=20),
     RegexSubstitution(
         "subsequent",
-        rf"\bsubsq\b",
+        r"\bsubsq\b",
         "subsequent",
     ),
     RegexSubstitution(
         "disturbing the peace",
-        rf"\bdist{sep}peace\b",
+        r"\bdist{sep}peace\b",
         "disturbing the peace",
     ),
     RegexSubstitution(
         "offender accountability act",
-        rf"\boaa\b",
+        r"\boaa\b",
         "offender accountability act",
     ),
     RegexSubstitution(
         "against",
-        rf"\b(?:agnst|agin)\b",
+        r"\b(?:agnst|agin)\b",
         "against",
     ),
     RegexSubstitution(
         "child",
-        rf"\b(?:chil|chld)\b",
+        r"\b(?:chil|chld)\b",
         "child",
     ),
     RegexSubstitution(
         "school",
-        rf"\bschl\b",
+        r"\bschl\b",
         "school",
     ),
     RegexSubstitution(
         "multiple",
-        rf"\bmult\b",
+        r"\bmult\b",
         "multiple",
     ),
     RegexSubstitution(
         "assailant",
-        rf"\bassail\b",
+        r"\bassail\b",
         "assailant",
     ),
     RegexSubstitution(
         "public disturbance",
-        rf"\b(?:public|pub|publ){sep}(?:disturbance|disturb|dist)\b",
+        r"\b(?:public|pub|publ){sep}(?:disturbance|disturb|dist)\b",
         "public disturbance",
     ),
     RegexSubstitution(
         "interfere",
-        rf"\b(?:interf|interfer)\b",
+        r"\b(?:interf|interfer)\b",
         "interfere",
     ),
-    RegexSubstitution(  # TODO should we leave obstructing/obstruction separate terms or lump into obstruct?
+    # TODO should we leave obstructing/obstruction separate terms or lump into obstruct?
+    RegexSubstitution(
         "obstructing",
-        rf"\bob\b",
+        r"\bob\b",
         "obstructing",
     ),
     RegexSubstitution(
         "law enforcement officer",
-        rf"\bleo\b",
+        r"\bleo\b",
         "law enforcement officer",
     ),
     RegexSubstitution(
         "officer",
-        rf"\b(?:offcr|ofcr)\b",
+        r"\b(?:offcr|ofcr)\b",
         "officer",
     ),
     RegexSubstitution(
         "minor",
-        rf"\b(?:min|minr|mnr)\b",
+        r"\b(?:min|minr|mnr)\b",
         "minor",
     ),
     RegexSubstitution(
@@ -386,12 +393,12 @@ substitutions = [
     ),
     RegexSubstitution(
         "major",
-        rf"\bmajr\b",
+        r"\bmajr\b",
         "major",
     ),
     RegexSubstitution(
         "willful",
-        rf"\b(?:wilfl|wlfl)\b",
+        r"\b(?:wilfl|wlfl)\b",
         "willful",
     ),
     RegexSubstitution(
@@ -406,12 +413,12 @@ substitutions = [
     ),
     RegexSubstitution(
         "unauthorized",
-        rf"\b(?:unauth|unau|unauthd)\b",
+        r"\b(?:unauth|unau|unauthd)\b",
         "unauthorized",
     ),
     RegexSubstitution(
         "child support",
-        rf"\b(?:child|chld|chi){sep}(?:support|supp|sup)\b",
+        r"\b(?:child|chld|chi){sep}(?:support|supp|sup)\b",
         "child support",
     ),
     RegexSubstitution(
@@ -435,7 +442,8 @@ substitutions = [
         r"\b(?:att|atmpt)\b",
         "attempted",
     ),
-    RegexSubstitution(  # NOTE: added negative look ahead so we don't remap "at risk" to "attempted risk"
+    # NOTE: added negative look ahead so we don't remap "at risk" to "attempted risk"
+    RegexSubstitution(
         "Attempted 2",
         r"\bat(?! risk)\b",
         "attempted",
@@ -450,7 +458,9 @@ substitutions = [
         r"\bvop\b",
         "violation of probation",
     ),
-    RegexSubstitution(  # NOTE: removed 'con' because shows up in some DV-related text, may not be a one-size fits all regex / 'consp' to conspiracy or conspire?
+    # NOTE: removed 'con' because shows up in some DV-related text,
+    # may not be a one-size fits all regex / 'consp' to conspiracy or conspire?
+    RegexSubstitution(
         "Conspiracy",
         r"\b(?:consp|conspi|conspira|conspirc|consprc|consprcy|cnsprcy|conspr)\b",
         "conspiracy",
@@ -526,10 +536,10 @@ substitutions = [
     ),
     RegexSubstitution(
         "motor vehicle 3",
-        rf"\b(?:mtv|mv)\b",
+        r"\b(?:mtv|mv)\b",
         "motor vehicle",
     ),
-    RegexSubstitution("odometer", rf"\bodom\b", "odometer"),
+    RegexSubstitution("odometer", r"\bodom\b", "odometer"),
     RegexSubstitution(
         "red light",
         rf"\bred{sep}light\b",
@@ -621,7 +631,7 @@ substitutions = [
     # AGE / FEMALE
     RegexSubstitution(
         "female",
-        rf"\bfem\b",
+        r"\bfem\b",
         "female",
     ),
     RegexSubstitution(
@@ -824,12 +834,12 @@ substitutions = [
     ),
     RegexSubstitution(
         "physical",
-        rf"\bphy\b",
+        r"\bphy\b",
         "physical",
     ),
     RegexSubstitution(
         "harmful",
-        rf"\bharmfl\b",
+        r"\bharmfl\b",
         "harmful",
     ),
     RegexSubstitution(
@@ -839,7 +849,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "Great Bodily Injury",
-        rf"\bgbi\b",
+        r"\bgbi\b",
         "great bodily injury",
     ),
     RegexSubstitution(
@@ -864,7 +874,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "Great Bodily Harm 2",
-        rf"\bgbh\b",
+        r"\bgbh\b",
         "great bodily harm",
     ),
     # ====
@@ -1026,60 +1036,62 @@ substitutions = [
         r"\bgen{sep}assembly\b",
         "general assembly",
     ),
-    RegexSubstitution(  # NOTE: added negative lookahead because was seeing "by off" when updating statutory rape terms & "by offense" is not correct
+    # NOTE: added negative lookahead because was seeing "by off" when updating
+    # statutory rape terms & "by offense" is not correct
+    RegexSubstitution(
         "offense",
-        rf"\b(?<!by )(?:offense|offen|off|offe)\b",
+        r"\b(?<!by )(?:offense|offen|off|offe)\b",
         "offense",
     ),
     RegexSubstitution(
         "information",
-        rf"\b(?:info|infor)\b",
+        r"\b(?:info|infor)\b",
         "information",
     ),
     # LEWD charge cat
     RegexSubstitution(
         "pornography",
-        rf"\b(?:porn|porno)\b",
+        r"\b(?:porn|porno)\b",
         "pornography",
     ),
     RegexSubstitution(
         "compelling",
-        rf"\bcompel\b",
+        r"\bcompel\b",
         "compelling",
     ),
     RegexSubstitution(
         "prostitution",
-        rf"\bprostit\b",
+        r"\bprostit\b",
         "prostitution",
     ),
     RegexSubstitution(
         "computer",
-        rf"\bcomputr\b",
+        r"\bcomputr\b",
         "computer",
     ),
     RegexSubstitution(
         "incapable",
-        rf"\bincap\b",
+        r"\bincap\b",
         "incapable",
     ),
     RegexSubstitution(
         "juvenile",
-        rf"\b(?:juv|juven)\b",
+        r"\b(?:juv|juven)\b",
         "juvenile",
     ),
     RegexSubstitution(
         "involving",
-        rf"\b(?:involv|invlv)\b",
+        r"\b(?:involv|invlv)\b",
         "involving",
     ),
     RegexSubstitution(
         "equipment",
-        rf"\bequip\b",
+        r"\bequip\b",
         "equipment",
     ),
     RegexSubstitution(
         "hazardous",
-        rf"\bhaz\b",
+        r"\bhaz\b",
         "hazardous",
     ),
     RegexSubstitution(  # NOTE: assault and battery unless A,B is followed by C
@@ -1125,7 +1137,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "molestation",
-        rf"\b(?:molestation|molest|mol)\b",
+        r"\b(?:molestation|molest|mol)\b",
         "molestation",
     ),
     RegexSubstitution(
@@ -1135,7 +1147,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "indecent",
-        rf"\bindec\b",
+        r"\bindec\b",
         "indecent",
     ),
     RegexSubstitution(
@@ -1145,12 +1157,12 @@ substitutions = [
     ),
     RegexSubstitution(
         "moving",
-        rf"\bmov\b",
+        r"\bmov\b",
         "moving",
     ),
     RegexSubstitution(
         "depiction",
-        rf"\bdptn\b",
+        r"\bdptn\b",
         "depiction",
     ),
     RegexSubstitution(
@@ -1160,7 +1172,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "dissemination",
-        rf"\b(?:dissm|dissem)\b",
+        r"\b(?:dissm|dissem)\b",
         "dissemination",
     ),
     RegexSubstitution(
@@ -1239,7 +1251,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "sexual act 2",
-        rf"\bsxact\b",
+        r"\bsxact\b",
         "sexual act",
     ),
     RegexSubstitution(
@@ -1259,7 +1271,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "commit sex abuse minor",
-        rf"\bcommsexabuseminor\b",
+        r"\bcommsexabuseminor\b",
         "commit sex abuse minor",
         priority=20,
     ),
@@ -1278,7 +1290,8 @@ substitutions = [
         rf"\b(?:sexual|sex){sep}(?:penetration|pen)\b",
         "sexual penetration",
     ),
-    RegexSubstitution(  # TODO: Revisit - hard to tell if exp/expl maps to "exploitation" or "explicit"
+    # TODO: Revisit - hard to tell if exp/expl maps to "exploitation" or "explicit"
+    RegexSubstitution(
         "sexual exploitation",
         rf"\b(?:sexual|sex){sep}(?:exploitation|exploit)\b",
         "sexual exploitation",
@@ -1298,7 +1311,8 @@ substitutions = [
         rf"\bsex{sep}w\b",
         "sex with",
     ),
-    RegexSubstitution(  # TODO: Revisit - hard to tell if offen/off maps to "offender" or "offense"
+    # TODO: Revisit - hard to tell if offen/off maps to "offender" or "offense"
+    RegexSubstitution(
         "sex offender",
         rf"\b(?:sexual|sex){sep}(?:offender|offend|offndr|ofndr)\b",
         "sex offender",
@@ -1320,7 +1334,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "sex related 2",
-        rf"\bsexreltd\b",
+        r"\bsexreltd\b",
         "sex related",
     ),
     RegexSubstitution(
@@ -1426,7 +1440,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "coercion",
-        rf"\b(?:coer|coercn)\b",
+        r"\b(?:coer|coercn)\b",
         "coercion",
     ),
     RegexSubstitution(
@@ -1455,13 +1469,13 @@ substitutions = [
     ),
     RegexSubstitution(
         "immoral",
-        rf"\b(?:immoral|imoral|imm|imor)\b",
+        r"\b(?:immoral|imoral|imm|imor)\b",
         "immoral",
         priority=4,
     ),
     RegexSubstitution(
         "purpose",
-        rf"\bpurp\b",
+        r"\bpurp\b",
         "purpose",
         priority=4,
     ),
@@ -1516,7 +1530,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "public",
-        rf"\b(?:pub|publ|pblc)\b",
+        r"\b(?:pub|publ|pblc)\b",
         "public",
     ),
     RegexSubstitution(
@@ -1531,23 +1545,24 @@ substitutions = [
     ),
     RegexSubstitution(
         "corporation",
-        rf"\bcorp\b",
+        r"\bcorp\b",
         "corporation",
     ),
     RegexSubstitution(
         "purchase",
-        rf"\bpurc\b",
+        r"\bpurc\b",
         "purchase",
     ),
-    RegexSubstitution(  # NOTE: pol may also be police - saw pol dog for example (police dog)
+    # NOTE: pol may also be police - saw pol dog for example (police dog)
+    RegexSubstitution(
         "political",
-        rf"\b(?:pol|polit|politcl)\b",
+        r"\b(?:pol|polit|politcl)\b",
         "political",
     ),
     RegexSubstitution("police dog", rf"\bpol{sep}dog\b", "police dog", priority=5),
     RegexSubstitution(
         "payroll",
-        rf"\bpayrll\b",
+        r"\bpayrll\b",
         "payroll",
     ),
     RegexSubstitution(
@@ -1557,17 +1572,17 @@ substitutions = [
     ),
     RegexSubstitution(
         "incident",
-        rf"\bincdnt\b",
+        r"\bincdnt\b",
         "incident",
     ),
     RegexSubstitution(
         "report",
-        rf"\brept\b",
+        r"\brept\b",
         "report",
     ),
     RegexSubstitution(
         "transfer",
-        rf"\btrnsf\b",
+        r"\btrnsf\b",
         "transfer",
     ),
     RegexSubstitution(
@@ -1582,7 +1597,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "insufficient",
-        rf"\binsuf\b",
+        r"\binsuf\b",
         "insufficient",
     ),
     RegexSubstitution(
@@ -1590,27 +1605,27 @@ substitutions = [
     ),
     RegexSubstitution(
         "institution",
-        rf"\b(?:instit|inst)\b",
+        r"\b(?:instit|inst)\b",
         "institution",
     ),
     RegexSubstitution(
         "organization",
-        rf"\borg\b",
+        r"\borg\b",
         "organization",
     ),
     RegexSubstitution(
         "animals",
-        rf"\banmls\b",
+        r"\banmls\b",
         "animals",
     ),
     RegexSubstitution(
         "animal",
-        rf"\banml\b",
+        r"\banml\b",
         "animal",
     ),
     RegexSubstitution(
         "software",
-        rf"\bsoftwr\b",
+        r"\bsoftwr\b",
         "software",
     ),
     RegexSubstitution(
@@ -1625,32 +1640,32 @@ substitutions = [
     ),
     RegexSubstitution(
         "official",
-        rf"\b(?:offic|offl|offcl|officl)\b",
+        r"\b(?:offic|offl|offcl|officl)\b",
         "official",
     ),
     RegexSubstitution(  # TODO: is 'misapp' ... misappropriation or misapplication?
         "misappropriation",
-        rf"\b(?:misappro|misapp)\b",
+        r"\b(?:misappro|misapp)\b",
         "misappropriation",
     ),
     RegexSubstitution(
         "misapplication",
-        rf"\bmisapl\b",
+        r"\bmisapl\b",
         "misappropriation",
     ),
     RegexSubstitution(
         "fiduciary",
-        rf"\bfiduc\b",
+        r"\bfiduc\b",
         "fiduciary",
     ),
     RegexSubstitution(
         "financial",
-        rf"\bfinan\b",
+        r"\bfinan\b",
         "financial",
     ),
     RegexSubstitution(
         "funds",
-        rf"\bfnds\b",
+        r"\bfnds\b",
         "funds",
     ),
     # FELONY - UNSPECIFIED terms
@@ -1668,13 +1683,13 @@ substitutions = [
     ),
     RegexSubstitution(
         "consummate",
-        rf"\b(?:consu|consummat)\b",
+        r"\b(?:consu|consummat)\b",
         "consummate",
         priority=4,
     ),
     RegexSubstitution(
         "deliver",
-        rf"\bdelive\b",
+        r"\bdelive\b",
         "deliver",
         priority=4,
     ),
@@ -1696,7 +1711,7 @@ substitutions = [
         "violation of civil",
         priority=4,
     ),
-    RegexSubstitution("rendering", rf"\brend\b", "rendering"),
+    RegexSubstitution("rendering", r"\brend\b", "rendering"),
     RegexSubstitution(
         "assistance first degree",
         rf"\bassistance{sep}1\b",
@@ -1717,87 +1732,88 @@ substitutions = [
     ),
     RegexSubstitution(
         "class",
-        rf"\bclas\b",
+        r"\bclas\b",
         "class",
     ),
     RegexSubstitution(
         "accessory",
-        rf"\b(?:accessry|accsry)\b",
+        r"\b(?:accessry|accsry)\b",
         "accessory",
     ),
     RegexSubstitution(
         "dependency",
-        rf"\bdepndncy\b",
+        r"\bdepndncy\b",
         "dependency",
     ),
     RegexSubstitution(
         "unspecified",
-        rf"\bunspfd\b",
+        r"\bunspfd\b",
         "unspecified",
     ),
     RegexSubstitution(
         "responsibility",
-        rf"\brespon?\b",
+        r"\brespon?\b",
         "responsibility",
     ),
     RegexSubstitution(
         "classification",
-        rf"\bclassif\b",
+        r"\bclassif\b",
         "classification",
     ),
     RegexSubstitution(
         "vice president",
-        rf"\bvp\b",
+        r"\bvp\b",
         "vice president",
         priority=30,
     ),
     # BRIBERY terms
     RegexSubstitution(
         "personal",
-        rf"\bpersona\b",
+        r"\bpersona\b",
         "personal",
     ),
     RegexSubstitution(
         "assistance",
-        rf"\basst\b",
+        r"\basst\b",
         "assistance",
     ),
     RegexSubstitution(
         "service",
-        rf"\bserv\b",
+        r"\bserv\b",
         "service",
     ),
     RegexSubstitution(
         "facilitation",
-        rf"\b(?:facil|fac)\b",
+        r"\b(?:facil|fac)\b",
         "facilitation",
     ),
     RegexSubstitution(
         "smuggling",
-        rf"\bsmug\b",
+        r"\bsmug\b",
         "smuggling",
     ),
     RegexSubstitution(
         "health",
-        rf"\bhlth\b",
+        r"\bhlth\b",
         "health",
     ),
-    RegexSubstitution(  # NOTE: 'off' tends to be 'offense' hence the priority on this one
+    # NOTE: 'off' tends to be 'offense' hence the priority on this one
+    RegexSubstitution(
         "official position", rf"\boff{sep}position\b", "official position", priority=5
     ),
     RegexSubstitution(
         "participants",
-        rf"\bparticipnts\b",
+        r"\bparticipnts\b",
         "participants",
     ),
     RegexSubstitution(
         "contestant",
-        rf"\bcntst\b",
+        r"\bcntst\b",
         "contestant",
     ),
     RegexSubstitution(
         "accept",
-        rf"\baccpt\b",
+        r"\baccpt\b",
         "accept",
     ),
     RegexSubstitution(
@@ -1807,17 +1823,17 @@ substitutions = [
     ),
     RegexSubstitution(
         "influence",
-        rf"\b(?:inflnce|influenc)\b",
+        r"\b(?:inflnce|influenc)\b",
         "influence",
     ),
     RegexSubstitution(
         "compensation",
-        rf"\bcompens\b",
+        r"\bcompens\b",
         "compensation",
     ),
     RegexSubstitution(
         "treatment",
-        rf"\btreatm\b",
+        r"\btreatm\b",
         "treatment",
     ),
     RegexSubstitution(
@@ -1832,17 +1848,17 @@ substitutions = [
     ),
     RegexSubstitution(
         "miscellaneous",
-        rf"\bmisc\b",
+        r"\bmisc\b",
         "miscellaneous",
     ),
     RegexSubstitution(
         "impersonating",
-        rf"\bimpers\b",
+        r"\bimpers\b",
         "impersonating",
     ),
     RegexSubstitution(
         "receiving",
-        rf"\brecv\b",
+        r"\brecv\b",
         "receiving",
     ),
     RegexSubstitution(
@@ -1880,22 +1896,22 @@ substitutions = [
     ),
     RegexSubstitution(
         "abandonment",
-        rf"\babandonmnt\b",
+        r"\babandonmnt\b",
         "abandonment",
     ),
     RegexSubstitution(
         "unattended",
-        rf"\bunatt\b",
+        r"\bunatt\b",
         "unattended",
     ),
     RegexSubstitution(
         "endanger",
-        rf"\b(?:endngr|endgr|endang)\b",
+        r"\b(?:endngr|endgr|endang)\b",
         "endanger",
     ),
     RegexSubstitution(
         "welfare",
-        rf"\b(?:wlfre|wlfr)\b",
+        r"\b(?:wlfre|wlfr)\b",
         "welfare",
     ),
     RegexSubstitution(
@@ -1905,32 +1921,32 @@ substitutions = [
     ),
     RegexSubstitution(
         "neglect",
-        rf"\bneglct\b",
+        r"\bneglct\b",
         "neglect",
     ),
     RegexSubstitution(
         "contribute",
-        rf"\bcontrib\b",
+        r"\bcontrib\b",
         "contribute",
     ),
     RegexSubstitution(
         "delinquincy",
-        rf"\b(?:dlnqncy|delinq)\b",
+        r"\b(?:dlnqncy|delinq)\b",
         "delinquincy",
     ),
     RegexSubstitution(
         "service",
-        rf"\bsrvc\b",
+        r"\bsrvc\b",
         "service",
     ),
     RegexSubstitution(
         "misrepresentation",
-        rf"\bmisrep\b",
+        r"\bmisrep\b",
         "misrepresentation",
     ),
     RegexSubstitution(
         "disabled",
-        rf"\bdisabld\b",
+        r"\bdisabld\b",
         "disabled",
     ),
     # ===
@@ -2004,7 +2020,7 @@ substitutions = [
     RegexSubstitution(
         "first degree", rf"\b(?:first|1|1st){sep}(?:dgr|dg|de|d)\b", "first degree"
     ),
-    RegexSubstitution("first degree 2", rf"\b1dg\b", "first degree"),
+    RegexSubstitution("first degree 2", r"\b1dg\b", "first degree"),
     RegexSubstitution(
         "circumstances in the first degree",
         rf"\bcircumstances{sep}1\b",
@@ -2083,17 +2099,17 @@ substitutions = [
     ),
     RegexSubstitution(
         "failure to yield",
-        rf"\bfty\b",
+        r"\bfty\b",
         "failure to yield",
     ),
     RegexSubstitution(
         "permit",
-        rf"\bperm\b",
+        r"\bperm\b",
         "permit",
     ),
     RegexSubstitution(
         "registration",
-        rf"\b(?:regis|registra)\b",
+        r"\b(?:regis|registra)\b",
         "registration",
     ),
     RegexSubstitution(
@@ -2154,7 +2170,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "disregard",
-        rf"\bdisreg\b",
+        r"\bdisreg\b",
         "disregard",
     ),
     RegexSubstitution(
@@ -2168,12 +2184,16 @@ substitutions = [
         "serial number",
     ),
     # DISTRIBUTION / FURNISH / TRAFFICK TERMS =======
-    RegexSubstitution(  # TODO: revisit traff/traf', more likely to be traffick/ing but could be traffic (cars)
+    # TODO: revisit traff/traf', more likely to be traffick/ing
+    # but could be traffic (cars)
+    RegexSubstitution(
         "traffick",
         r"\b(?:tfk|traff|traf)\b",
         "traffick",
     ),
-    RegexSubstitution(  # TODO: revisit adding 'dist', more likely to be distribution but could be disturbance
+    # TODO: revisit adding 'dist', more likely to be distribution
+    # but could be disturbance
+    RegexSubstitution(
         "distribution",
         r"\b(?:distr|distrib)\b",
         "distribution",
@@ -2248,7 +2268,9 @@ substitutions = [
         r"\b(?:furnishing|furn)\b",
         "furnish",
     ),
-    RegexSubstitution(  # TODO: revisit adding 'man', more likely to be manufacture/ing but could have other meaning
+    # TODO: revisit adding 'man', more likely to be manufacture/ing
+    # but could have other meaning
+    RegexSubstitution(
         "manufacturing",
         r"\b(?:manuf|manu|mfg|manf|manfac)\b",
         "manufacturing",
@@ -2315,7 +2337,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "with intent to distribute",
-        rf"\bwitd\b",
+        r"\bwitd\b",
         "with intent to distribute",
         priority=5,
     ),
@@ -2357,7 +2379,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "material",
-        rf"\b(?:matrl|mat|mtrl)\b",
+        r"\b(?:matrl|mat|mtrl)\b",
         "material",
         priority=5,
     ),
@@ -2504,12 +2526,12 @@ substitutions = [
     ),
     RegexSubstitution(
         "supply",
-        rf"\bsupp\b",
+        r"\bsupp\b",
         "supply",
     ),
     RegexSubstitution(
         "liquor",
-        rf"\bliq\b",
+        r"\bliq\b",
         "liquor",
     ),
     RegexSubstitution(
@@ -2519,32 +2541,32 @@ substitutions = [
     ),
     RegexSubstitution(
         "minor in possession",
-        rf"\bmip\b",
+        r"\bmip\b",
         "minor in possession",
     ),
     RegexSubstitution(
         "premises",
-        rf"\bprem\b",
+        r"\bprem\b",
         "premises",
     ),
     RegexSubstitution(
         "consume",
-        rf"\bcnsum\b",
+        r"\bcnsum\b",
         "consume",
     ),
     RegexSubstitution(
         "intoxication",
-        rf"\bintox\b",
+        r"\bintox\b",
         "intoxication",
     ),
     RegexSubstitution(
         "available",
-        rf"\bavail\b",
+        r"\bavail\b",
         "available",
     ),
     RegexSubstitution(
         "unlicensed",
-        rf"\bunlic\b",
+        r"\bunlic\b",
         "unlicensed",
     ),
     RegexSubstitution(
@@ -2559,7 +2581,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "required",
-        rf"\breq\b",
+        r"\breq\b",
         "required",
     ),
     RegexSubstitution(
@@ -2569,7 +2591,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "enticement",
-        rf"\bentcmnt\b",
+        r"\bentcmnt\b",
         "enticement",
     ),
     # SUBSTANCE TERMS ========
@@ -2593,7 +2615,7 @@ substitutions = [
     ),
     RegexSubstitution(
         "solicitation",
-        rf"\b(?:solct|sol|solicit|solic)\b",
+        r"\b(?:solct|sol|solicit|solic)\b",
         "solicitation",
     ),
     RegexSubstitution(

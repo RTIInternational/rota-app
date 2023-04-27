@@ -1,6 +1,5 @@
 from subprocess import Popen
-import re
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from time import sleep
 import pytest
 
